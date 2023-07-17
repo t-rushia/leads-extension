@@ -1,8 +1,9 @@
 let leads = [];
-let leadsFromLocalStorage = JSON.parse(localStorage.getItem("leads"));
 let inputText = document.querySelector("#input-text");
 const submitBtn = document.querySelector("#submit-btn");
 const listItems = document.querySelector("#ul-el");
+const deleteBtn = document.querySelector("#delete-btn");
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("leads"));
 
 submitBtn.addEventListener("click", function () {
   if (inputText.value === "") {
@@ -16,10 +17,24 @@ submitBtn.addEventListener("click", function () {
   renderList();
 });
 
+inputText.addEventListener("keyup", function () {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.querySelector("#submit-btn").click();
+  }
+});
+
 if (leadsFromLocalStorage) {
   leads = leadsFromLocalStorage;
   renderList();
 }
+
+deleteBtn.addEventListener("dblclick", function () {
+  localStorage.clear();
+  leads = [];
+  listItems.innerHTML = "";
+  inputText.value = "";
+});
 
 function renderList() {
   let list = "";
