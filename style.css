@@ -21,6 +21,14 @@ ul {
   list-style-type: none;
 }
 
+li {
+  margin-top: 3px;
+}
+
+a {
+  color: #557a95;
+}
+
 button {
   max-width: 70px;
   padding: 5px 0;
