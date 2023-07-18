@@ -14,7 +14,7 @@ submitBtn.addEventListener("click", function () {
     localStorage.setItem("leads", JSON.stringify(leads));
   }
   inputText.value = "";
-  renderList();
+  render(leads);
 });
 
 inputText.addEventListener("keyup", function () {
@@ -26,7 +26,7 @@ inputText.addEventListener("keyup", function () {
 
 if (leadsFromLocalStorage) {
   leads = leadsFromLocalStorage;
-  renderList();
+  render(leads);
 }
 
 deleteBtn.addEventListener("dblclick", function () {
@@ -34,12 +34,13 @@ deleteBtn.addEventListener("dblclick", function () {
   leads = [];
   listItems.innerHTML = "";
   inputText.value = "";
+  render(leads);
 });
 
-function renderList() {
+function render(myLeads) {
   let list = "";
-  for (let i = 0; i < leads.length; i++) {
-    list += `<li><a href = '${leads[i]}' target = '_blank'> ${leads[i]} </a></li>`;
+  for (let i = 0; i < myLeads.length; i++) {
+    list += `<li><a href = '${myLeads[i]}' target = '_blank'> ${myLeads[i]} </a></li>`;
   }
   listItems.innerHTML = list;
 }
