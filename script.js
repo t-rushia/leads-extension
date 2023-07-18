@@ -3,6 +3,7 @@ let inputText = document.querySelector("#input-text");
 const submitBtn = document.querySelector("#submit-btn");
 const listItems = document.querySelector("#ul-el");
 const deleteBtn = document.querySelector("#delete-btn");
+const tabBtn = document.querySelector("#tab-btn");
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("leads"));
 
 submitBtn.addEventListener("click", function () {
@@ -28,6 +29,14 @@ if (leadsFromLocalStorage) {
   leads = leadsFromLocalStorage;
   render(leads);
 }
+
+tabBtn.addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    leads.push(tabs[0].url);
+    localStorage.setItem("leads", JSON.stringify(leads));
+    render(leads);
+  });
+});
 
 deleteBtn.addEventListener("dblclick", function () {
   localStorage.clear();
